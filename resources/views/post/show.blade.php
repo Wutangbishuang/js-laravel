@@ -14,8 +14,7 @@
 
             <p class="blog-post-meta">{{$post->created_at}} by <a href="#">Kassandra Ankunding2</a></p>
 
-            <p>{{$post->content}}
-                <img src="http://127.0.0.1:8000/storage/72c76b674ec8793fcfd6555ff371bfbd/nxC9ozLfkORmoY92q9lPsejXchVvdNO2cwHiR2Jf.jpeg" alt="63" style="max-width: 100%;">
+            <p>{!! $post->content !!}
             </p>
             <div>
                                     <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
