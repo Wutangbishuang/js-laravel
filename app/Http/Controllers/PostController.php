@@ -23,10 +23,16 @@ class PostController extends Controller
     {
         return view('post/create');
     }
-    // 创建文章行文
+    // 创建文章行为
     public function store()
     {
-
+//        $post = new Post();
+//        $post->title = request('title');
+//        $post->content = request('content');
+//        可以写成下面的方式
+        $params = request(['title','content']);
+        Post::create($params);
+        return redirect('/posts');
     }
     // 文章编辑
     public function edit()
