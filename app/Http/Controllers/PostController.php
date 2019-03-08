@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Post;
+use App\Zan;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,7 +12,7 @@ class PostController extends Controller
     // 列表页面
     public function index()
     {
-        $posts = Post::orderBy('created_at','desc')->withCount("comments")->paginate(6);
+        $posts = Post::orderBy('created_at','desc')->withCount(['comments','zans'])->paginate(6);
         return view('post/index' , compact('posts'));
     }
     // 列表详情
@@ -97,5 +98,25 @@ class PostController extends Controller
 
         // 渲染
         return back();
+    }
+
+    // 赞
+    public function zan(Post $post)
+    {
+        $param = [
+            'user_id' => \Auth::id(),
+            'post_id' => $post->id,
+        ];
+        // firstOrCreate -> 如果 有 这个数据就查找出来  如果 没有 就创建
+        Zan::firstOrCreate($param);
+
+        return back();
+    }
+
+    // 取消赞
+    public function unzan(Post $post)
+    {
+        $post->zan(\Auth::id())->delete();
+        return baclk();
     }
 }
