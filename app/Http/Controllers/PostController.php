@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -10,12 +11,13 @@ class PostController extends Controller
     // 列表页面
     public function index()
     {
-        $posts = Post::orderBy('created_at','desc')->paginate(6);
+        $posts = Post::orderBy('created_at','desc')->withCount("comments")->paginate(6);
         return view('post/index' , compact('posts'));
     }
     // 列表详情
     public function show(Post $post)
     {
+        $post->load('comments');
         return view('post/show' , compact('post'));
     }
     // 创建文章
@@ -78,5 +80,22 @@ class PostController extends Controller
     {
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/'. $path);
+    }
+
+    // 提交评论
+    public function comment(Post $post)
+    {
+        $this->validate(request(),[
+            'content' => 'required|min:3\max:30',
+        ]);
+
+        // 逻辑
+        $comment = new Comment();
+        $comment->user_id = \Auth::id();
+        $comment->content= request('content');
+        $post->comments()->save($comment);
+
+        // 渲染
+        return back();
     }
 }
