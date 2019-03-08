@@ -37,7 +37,8 @@ class PostController extends Controller
 //        $post->title = request('title');
 //        $post->content = request('content');
 //        可以写成下面的方式
-        $params = request(['title','content']);
+        $user_id = \Auth::id();
+        $params = array_merge(request(['title' , 'content']) , compact('user_id'));
         Post::create($params);
 
         // 渲染
@@ -56,6 +57,7 @@ class PostController extends Controller
             'title' => 'required|string|max:100|min:5',
             'content' => 'required|string|min:10'
         ]);
+        $this->authorize('update' , $post);
         // 逻辑
         $post->title = request('title');
         $post->content = request('content');
@@ -66,6 +68,7 @@ class PostController extends Controller
     // 删除文章
     public function delete(Post $post)
     {
+        $this->authorize('delete' , $post);
         $post->delete();
         return redirect("/posts");
     }
