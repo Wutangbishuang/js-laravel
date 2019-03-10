@@ -37,3 +37,6 @@ Route::get('/logout' , '\App\Http\Controllers\LoginController@logout');
 Route::get('/user/me/setting' , '\App\Http\Controllers\UserController@setting');
 // 个人设置操作
 Route::post('/user/me/setting' , '\App\Http\Controllers\UserController@settingStore');
+
+//文章搜索页
+Route::get('/posts/search' , '\App\Http\Controllers\PostController@search');
