@@ -40,3 +40,8 @@ Route::post('/user/me/setting' , '\App\Http\Controllers\UserController@settingSt
 
 //文章搜索页
 Route::get('/posts/search' , '\App\Http\Controllers\PostController@search');
+
+// 个人中心
+Route::get('/user/{user}' , '\App\Http\Controllers\UserController@show');
+Route::post('/user/{user}/fan' , '\App\Http\Controllers\UserController@fan');
+Route::post('/user/{user}/unfan' , '\App\Http\Controllers\UserController@unfan');
