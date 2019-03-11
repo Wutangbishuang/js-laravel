@@ -56,4 +56,12 @@ class User extends Authenticatable
     {
         return $this->stars()->where('star_id' , $uid)->count();
     }
+
+    public function getAvatarAttribute($value)
+    {
+        if (empty($value)) {
+            return '/storage/231c7829cbd325d978898cec389b3f65/egwV7WNPQMSPgMe7WmtjRN7bGKcD0vBAmpRrpLlI.jpeg';
+        }
+        return $value;
+    }
 }
