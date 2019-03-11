@@ -4,10 +4,9 @@
         <blockquote>
             <p><img src="/storage/9f0b0809fd136c389c20f949baae3957/iBkvipBCiX6cHitZSdTaXydpen5PBiul7yYCc88O.jpeg" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{$user->name}}
             </p>
-
-
             <footer>关注：{{$user->stars_count}}｜粉丝：{{$user->fans_count}}｜文章：{{$user->posts_count}}</footer>
-                    </blockquote>
+            @include('user.badges.like' , ['target_user' => $user])
+        </blockquote>
     </div>
     <div class="col-sm-8 blog-main">
         <div class="nav-tabs-custom">
@@ -35,7 +34,7 @@
                             <div>
                                 <button class="btn btn-default like-button" like-value="1" like-user="6" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
                             </div>
-
+                            @include('user.badges.like' , ['target_user' => $user])
                         </div>
                         @endforeach
                     </div>
@@ -46,9 +45,7 @@
                         <div class="blog-post" style="margin-top: 30px">
                             <p class="">{{$fuser->name}}</p>
                             <p class="">关注：{{$fuser->stars_count}} | 粉丝：{{$fuser->fans_count}}｜ 文章：{{$fuser->posts_count}}</p>
-                            <div>
-                                <button class="btn btn-default like-button" like-value="1" like-user="6" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
-                            </div>
+                            @include('user.badges.like' , ['target_user' => $user])
 
                         </div>
                     @endforeach
