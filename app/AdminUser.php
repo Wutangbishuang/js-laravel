@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\BaseModel;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminUser extends BaseModel
+class AdminUser extends Authenticatable
 {
-    //
+    protected $rememberTokenName = '';
 }
