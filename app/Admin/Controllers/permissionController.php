@@ -2,12 +2,15 @@
 
 namespace App\Admin\Controllers;
 
+use App\AdminPermission;
+
 class PermissionController extends Controller
 {
     // 权限列表页面
     public function index()
     {
-        return view('admin.permission.index');
+        $permissions = AdminPermission::paginate(10);
+        return view('admin.permission.index' , compact('permissions'));
     }
 
     // 创建权限页面
@@ -19,6 +22,12 @@ class PermissionController extends Controller
     // 创建权限实际行为
     public function store()
     {
-        
+        $this->validate(request() , [
+            'name' => 'required|min:3',
+            'description' => 'required'
+        ]);
+
+        AdminPermission::create(request(['name' , 'description']));
+        return redirect('/admin/permission');
     }
 }
