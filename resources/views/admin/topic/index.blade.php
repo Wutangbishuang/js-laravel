@@ -19,20 +19,15 @@
                                 <th>专题名称</th>
                                 <th>操作</th>
                             </tr>
-                                                            <tr>
-                                    <td>1</td>
-                                    <td>旅游</td>
+                            @foreach($topics as $topic)
+                            <tr>
+                                    <td>{{$topic->id}}</td>
+                                    <td>{{$topic->name}}</td>
                                     <td>
-                                        <a type="button" class="btn resource-delete" delete-url="/admin/topics/1" href="#" >删除</a>
+                                        <a type="button" class="btn resource-delete" delete-url="/admin/topics/{{$topic->id}}" href="#" >删除</a>
                                     </td>
-                                </tr>
-                                                            <tr>
-                                    <td>2</td>
-                                    <td>轻松</td>
-                                    <td>
-                                        <a type="button" class="btn resource-delete" delete-url="/admin/topics/2" href="#" >删除</a>
-                                    </td>
-                                </tr>
+                            </tr>
+                            @endforeach
                                                         </tbody></table>
                     </div>
                 </div>
