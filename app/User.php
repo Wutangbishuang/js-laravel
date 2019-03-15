@@ -64,4 +64,17 @@ class User extends Authenticatable
         }
         return $value;
     }
+    
+    // 用户收到的通知 
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class , 'user_notice' , 'user_id' , 'notice_id')
+            ->withPivot(['user_id' , 'notice_id']);
+    }
+
+    // 给用户增加通知
+    public function addNotice($notice)
+    {
+        return $this->notices()->save($notice); //detach
+    }
 }
