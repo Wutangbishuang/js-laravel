@@ -6,7 +6,7 @@ use App\BaseModel;
 
 class AdminRole extends BaseModel
 {
-    protected $table = 'admin_roes';
+    protected $table = 'admin_roles';
 
     // 当前角色的所有权限
     public function permissions()

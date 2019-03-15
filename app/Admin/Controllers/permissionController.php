@@ -28,6 +28,6 @@ class PermissionController extends Controller
         ]);
 
         AdminPermission::create(request(['name' , 'description']));
-        return redirect('/admin/permission');
+        return redirect('/admin/permissions');
     }
 }

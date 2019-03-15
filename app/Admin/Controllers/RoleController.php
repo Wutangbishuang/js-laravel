@@ -35,16 +35,16 @@ class RoleController extends Controller
     public function permission(AdminRole $role)
     {
         // 获取所有权限
-        $perminssions = AdminPermission::all();
+        $permissions = AdminPermission::all();
 
         // 获取当前角色权限
         $myPermissions = $role->permissions;
 
-        return view("admin/role/permission" , compact('perminssions' , 'myPermissions'));
+        return view("admin/role/permission" , compact('permissions' , 'myPermissions' , 'role'));
     }
 
     // 储存角色权限行为
-    public function storePermission()
+    public function storePermission(AdminRole $role)
     {
         $this->validate(request() , [
            'permissions' => 'required|array'
@@ -63,5 +63,6 @@ class RoleController extends Controller
         foreach ($deletePermissions as $permission){
             $role->deletePermission($permission);
         }
+        return redirect('/admin/roles');
     }
 }
